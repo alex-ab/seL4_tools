@@ -46,7 +46,7 @@ case "$PLAT" in
     "zynq7000"|"tk1"|"bcm2837")
         FORMAT=elf32-littlearm
         ;;
-    "hikey"|"zynqmp"|"qemu-arm-virt")
+    "hikey"|"zynqmp"|"qemu-arm-virt"|"imx8mq-evk")
         if [ "$SEL4_ARCH" == "aarch64" ]
         then
             FORMAT=elf64-littleaarch64
