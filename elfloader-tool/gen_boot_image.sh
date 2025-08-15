@@ -69,6 +69,10 @@ case "$PLAT" in
             FORMAT=elf32-littlearm
         fi
         ;;
+    "imx8mq-evk")
+        ENTRY_ADDR=0x40010000;
+        FORMAT=elf64-littleaarch64
+        ;;
     "apq8064")
         ENTRY_ADDR=0x82008000;
         FORMAT=elf32-littlearm
