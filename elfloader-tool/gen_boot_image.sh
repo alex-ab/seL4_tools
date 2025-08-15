@@ -69,6 +69,16 @@ case "$PLAT" in
             FORMAT=elf32-littlearm
         fi
         ;;
+    "imx8mq-evk")
+        ENTRY_ADDR=0x50000000;
+        if [ "$SEL4_ARCH" == "aarch64" ]
+        then
+            FORMAT=elf64-littleaarch64
+        else
+            echo "$0: Unsupported 32bit platform \"$PLAT\""
+            exit -1
+        fi
+        ;;
     "apq8064")
         ENTRY_ADDR=0x82008000;
         FORMAT=elf32-littlearm
