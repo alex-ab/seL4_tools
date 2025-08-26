@@ -29,6 +29,10 @@ endif
 
 # Source files required to build the target
 CFILES   := $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/*.c)))
+CFILES   += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/drivers/*.c)))
+CFILES   += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/drivers/smp/*.c)))
+CFILES   += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/drivers/uart/*.c)))
+CFILES   += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/drivers/timer/*.c)))
 CFILES   += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/arch-$(ARCH)/*.c)))
 CFILES   += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/plat/$(PLAT)/*.c)))
 CFILES   += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/binaries/elf/*.c)))
@@ -40,6 +44,11 @@ ASMFILES := $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/pla
 ASMFILES += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/arch-$(ARCH)/$(TYPE_SUFFIX)/*.S)))
 ASMFILES += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/arch-$(ARCH)/armv/$(ARMV)/$(TYPE_SUFFIX)/*.S)))
 ASMFILES += $(sort $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/arch-$(ARCH)/*.S)))
+
+ifeq ($(__ARM_32__), y)
+ASMFILES := $(filter-out src/arch-arm/32/crt0_64.S,$(ASMFILES))
+ASMFILES := $(filter-out src/plat/$(PLAT)/monitor.S,$(ASMFILES))
+endif
 
 NK_CFLAGS += -D_XOPEN_SOURCE=700
 
