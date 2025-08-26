@@ -1,13 +1,7 @@
 /*
- * Copyright 2017, Data61
- * Commonwealth Scientific and Industrial Research Organisation (CSIRO)
- * ABN 41 687 119 230.
+ * Copyright 2017, Data61, CSIRO (ABN 41 687 119 230)
  *
- * This software may be distributed and modified according to the terms of
- * the BSD 2-Clause license. Note that NO WARRANTY is provided.
- * See "LICENSE_BSD2.txt" for details.
- *
- * @TAG(DATA61_BSD)
+ * SPDX-License-Identifier: BSD-2-Clause
  */
 
 #pragma once
@@ -55,7 +49,7 @@ struct cpio_info {
  * @return             The location of the file in memory; NULL if the index
  *                     exceeds the number of files in the CPIO archive.
  */
-void *cpio_get_entry(void *archive, int index, const char **name, unsigned long *size);
+const void *cpio_get_entry(const void *archive, unsigned long len, int index, const char **name, unsigned long *size);
 
 /**
  * Retrieve file information from a provided file name
@@ -65,7 +59,7 @@ void *cpio_get_entry(void *archive, int index, const char **name, unsigned long 
  * @return             The location of the file in memory; NULL if the file
  *                     does not exist.
  */
-void *cpio_get_file(void *archive, const char *name, unsigned long *size);
+const void *cpio_get_file(const void *archive, unsigned long len, const char *name, unsigned long *size);
 
 /**
  * Retrieves information about the provided CPIO archive
@@ -73,7 +67,7 @@ void *cpio_get_file(void *archive, const char *name, unsigned long *size);
  * @param[out] info    A CPIO info structure to populate
  * @return             Non-zero on error.
  */
-int cpio_info(void *archive, struct cpio_info *info);
+int cpio_info(const void *archive, unsigned long len, struct cpio_info *info);
 
 /**
  * Writes the list of file names contained within a CPIO archive into
@@ -82,5 +76,5 @@ int cpio_info(void *archive, struct cpio_info *info);
  * @param[in] buf      A memory location to store the CPIO file list to
  * @param[in] buf_len  The length of the provided buf
  */
-void cpio_ls(void *archive, char **buf, unsigned long buf_len);
+void cpio_ls(const void *archive, unsigned long len, char **buf, unsigned long buf_len);
 
