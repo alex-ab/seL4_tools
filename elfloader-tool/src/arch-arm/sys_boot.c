@@ -216,10 +216,12 @@ void continue_boot(int was_relocated)
         arm_enable_mmu();
     }
 
+#if 0
     /* Enter kernel. The UART may no longer be accessible here. */
     if ((uintptr_t)uart_get_mmio() < kernel_info.virt_region_start) {
         printf("Jumping to kernel-image entry point...\n\n");
     }
+#endif
 
     ((init_arm_kernel_t)kernel_info.virt_entry)(user_info.phys_region_start,
                                                 user_info.phys_region_end,
