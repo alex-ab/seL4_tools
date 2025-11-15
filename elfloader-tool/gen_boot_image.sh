@@ -69,7 +69,7 @@ case "$PLAT" in
             FORMAT=elf32-littlearm
         fi
         ;;
-    "imx8mq-evk")
+    "imx8mq-evk"|"imx8mp-evk")
         ENTRY_ADDR=0x50000000;
         if [ "$SEL4_ARCH" == "aarch64" ]
         then
